@@ -1,9 +1,7 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { appWindow } from '@tauri-apps/api/window';
 
 const Bar: FC = () => {
-  const [isWindowMax, setIsWindowMax] = useState(true);
-
   return (
     <div data-tauri-drag-region className="h-8 bg-toolbar select-none flex justify-content justify-end">
       <div className="titlebar-button"
@@ -17,10 +15,8 @@ const Bar: FC = () => {
         />
       </div>
       <div className="titlebar-button"
-        onClick={() => {
-          isWindowMax ? appWindow.unmaximize() : appWindow.maximize();
-
-          setIsWindowMax(!isWindowMax);
+        onClick={async() => {
+          await appWindow.isMaximized() ? appWindow.unmaximize() : appWindow.maximize();
         }}
       >
         <img
@@ -36,7 +32,7 @@ const Bar: FC = () => {
         <img src="/public/mdi_close.svg" alt="close" />
       </div>
     </div>
-  )
+  );
 }
 
 export default Bar;
