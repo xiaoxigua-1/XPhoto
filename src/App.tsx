@@ -1,9 +1,10 @@
 import React from 'react';
+import Bar from './components/bar';
 
 function App() {
   return (
-    <div className="App bg-black w-screen h-screen">
-    
+    <div className="App w-screen">
+      <Bar />
     </div>
   );
 }
