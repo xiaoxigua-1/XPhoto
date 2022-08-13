@@ -1,11 +1,30 @@
 import React, { FC } from 'react';
+import { Group } from '../data';
+import { AiOutlineSetting } from "react-icons/ai";
 
-const Nav: FC = () => {
+interface Nav {
+  groups: Group[];
+  setGroup: React.Dispatch<React.SetStateAction<Group[]>>;
+  setSelectGroup: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Nav: FC<Nav> = ({ groups, setGroup, setSelectGroup }) => {
   return (
-    <div>
-
+    <div className="bg-27272c w-14 h-screen pt-8 flex flex-col overflow-hidden items-center">
+      <div className="flex-grow overflow-auto pb-3 w-full">
+        {groups.map((group) => {
+          return (
+            <div className="w-10 h-10 mt-3 mx-auto flex justify-center items-center rounded-full select-none overflow-hidden cursor-pointer" style={{backgroundColor: group.color}}>
+              {group.name}
+            </div>
+          )
+        })}
+      </div>
+      <div className="cursor-pointer my-3">
+        <AiOutlineSetting color={'#ffffff'} size={36}/>
+      </div>
     </div>
   );
-}
+};
 
 export default Nav;

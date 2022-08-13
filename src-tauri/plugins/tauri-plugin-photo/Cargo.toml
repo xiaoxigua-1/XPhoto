@@ -9,3 +9,5 @@ exclude = ["/examples"]
 
 [dependencies]
 tauri = { version = "1.0.5" }
+diesel = { version = "1.4.4", features = ["sqlite"] }
+dotenv = "0.15.0"

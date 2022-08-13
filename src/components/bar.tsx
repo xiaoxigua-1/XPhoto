@@ -24,7 +24,7 @@ const Bar: FC = () => {
           alt="maximize"
         />
       </div>
-      <div className="titlebar-button"
+      <div className="titlebar-button hover:bg-red-500"
         onClick={() => {
           appWindow.close();
         }}
