@@ -5,10 +5,11 @@ import { AiOutlineSetting } from "react-icons/ai";
 interface Nav {
   groups: Group[];
   setGroup: React.Dispatch<React.SetStateAction<Group[]>>;
-  setSelectGroup: React.Dispatch<React.SetStateAction<string>>;
+  setSelectGroup: React.Dispatch<React.SetStateAction<number>>;
+  setOpenSetting: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Nav: FC<Nav> = ({ groups, setGroup, setSelectGroup }) => {
+const Nav: FC<Nav> = ({ groups, setGroup, setSelectGroup, setOpenSetting }) => {
   return (
     <div className="bg-27272c w-14 h-screen pt-8 flex flex-col overflow-hidden items-center">
       <div className="flex-grow overflow-auto pb-3 w-full">
@@ -20,7 +21,9 @@ const Nav: FC<Nav> = ({ groups, setGroup, setSelectGroup }) => {
           )
         })}
       </div>
-      <div className="cursor-pointer my-3">
+      <div className="cursor-pointer my-3"
+        onClick={() => setOpenSetting(true)}
+      >
         <AiOutlineSetting color={'#ffffff'} size={36}/>
       </div>
     </div>

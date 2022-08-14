@@ -3,3 +3,6 @@ export interface Group {
   color: string;
 }
 
+export interface Settings {
+  theme: string;
+}
