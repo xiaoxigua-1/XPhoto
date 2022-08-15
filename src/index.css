@@ -27,3 +27,7 @@ html {
 .bg-toolbar {
   background-color: #353438;
 }
+
+.group:hover div {
+  display: block;
+}

@@ -16,7 +16,12 @@ interface RightMenu {
   index: number;
 }
 
-const rightMenuContext = ['Delete', 'Edit']
+const rightMenuContext = ['Delete', 'Edit'];
+
+const groupName = (name: string) => {
+  if (name.length < 4) return name;
+  else return name.substring(0, 4);
+}
 
 const Nav: FC<Nav> = ({ groups, setGroup, setSelectGroup, setOpenSetting }) => {
   const [rightMenu, setRightMenu] = useState<RightMenu>({
@@ -41,8 +46,10 @@ const Nav: FC<Nav> = ({ groups, setGroup, setSelectGroup, setOpenSetting }) => {
         {groups.map((group, index) => {
           return (
             <div
-              className="w-10 h-10 mt-3 mx-auto flex justify-center items-center rounded-full select-none overflow-hidden cursor-pointer"
-              style={{backgroundColor: group.color}}
+              className="w-10 h-10 mt-3 mx-auto flex justify-center items-center rounded-full overflow-hidden select-none cursor-pointer group relative"
+              style={{
+                backgroundColor: group.color,
+              }}
               onClick={() => setSelectGroup(index)}
               onContextMenu={(e) => {
                 // menu
@@ -55,20 +62,24 @@ const Nav: FC<Nav> = ({ groups, setGroup, setSelectGroup, setOpenSetting }) => {
                 e.preventDefault();
               }}
             >
-              {group.name}
+              {groupName(group.name)}
+              <div className="fixed left-14 hidden bg-gray-900 text-white p-2 rounded-md">{group.name}</div>
+              <div className="fixed w-3 overflow-hidden hidden left-11">
+                <div className="h-4 bg-gray-900 -rotate-45 transform origin-top-right"></div>
+              </div>
             </div>
-          )
+          );
         })}
       </div>
       <div
-        className="absolute flex flex-col select-none cursor-pointer bg-zinc-600 text-xs text-white"
+        className="absolute flex flex-col select-none cursor-pointer bg-zinc-600 text-xs text-white py-1 rounded-sm shadow-md"
         style={{
           display: rightMenu.hide ? 'none' : 'block',
           top: rightMenu.y,
           left: rightMenu.x
         }}>
         {rightMenuContext.map(context => (
-          <div className="hover:bg-blue-600 p-1 px-4">{context}</div>
+          <div className="hover:bg-blue-600 p-1 px-3">{context}</div>
         ))}
       </div>
       <div className="cursor-pointer my-3"

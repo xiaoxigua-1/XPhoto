@@ -19,7 +19,7 @@ function App() {
           color: '#ffffff',
         },
         {
-          name: 'foo',
+          name: 'fooasdasdasdasd',
           color: '#ffffe0',
         }
       ]);
