@@ -9,7 +9,7 @@ function App() {
   const [groups, setGroups] = useState<Group[]>([]);
   const [selectGroup, setSelectGroup] = useState<number>(0);
   const [settings, setSettings] = useState<Settings>();
-  const [openSetting, setOpenSetting] = useState(true);
+  const [openSetting, setOpenSetting] = useState(false);
 
   useEffect(() => {
     if (import.meta.env.DEV) {
@@ -17,70 +17,6 @@ function App() {
         {
           name: 'foo',
           color: '#ffffff',
-        },
-        {
-          name: 'foo',
-          color: '#ffffe0',
-        },
-        {
-          name: 'foo',
-          color: '#ffffe0',
-        },
-        {
-          name: 'foo',
-          color: '#ffffe0',
-        },
-        {
-          name: 'foo',
-          color: '#ffffe0',
-        },
-        {
-          name: 'foo',
-          color: '#ffffe0',
-        },
-        {
-          name: 'foo',
-          color: '#ffffe0',
-        },
-        {
-          name: 'foo',
-          color: '#ffffe0',
-        },
-        {
-          name: 'foo',
-          color: '#ffffe0',
-        },
-        {
-          name: 'foo',
-          color: '#ffffe0',
-        },
-        {
-          name: 'foo',
-          color: '#ffffe0',
-        },
-        {
-          name: 'foo',
-          color: '#ffffe0',
-        },
-        {
-          name: 'foo',
-          color: '#ffffe0',
-        },
-        {
-          name: 'foo',
-          color: '#ffffe0',
-        },
-        {
-          name: 'foo',
-          color: '#ffffe0',
-        },
-        {
-          name: 'foo',
-          color: '#ffffe0',
-        },
-        {
-          name: 'foo',
-          color: '#ffffe0',
         },
         {
           name: 'foo',
