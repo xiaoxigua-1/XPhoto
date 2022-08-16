@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Group, Settings } from './data';
 import Bar from './components/bar';
 import Nav from './components/nav';
-import Setting from './components/settings';
+import Context from './components/context';
 import { invoke } from '@tauri-apps/api/tauri';
 
 function App() {
@@ -35,10 +35,16 @@ function App() {
   }, []);
 
   return (
-    <div className="App w-screen">
+    <div className="App w-screen flex">
       <Bar />
       <Nav groups={groups} setGroup={setGroups} setSelectGroup={setSelectGroup} setOpenSetting={setOpenSetting} />
-      {openSetting ? <Setting /> : null}
+      <Context
+        openSetting={openSetting}
+        setOpenSetting={setOpenSetting}
+        selectGroup={selectGroup}
+        settings={settings}
+        groups={groups}
+      />
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { appWindow } from '@tauri-apps/api/window';
 
 const Bar: FC = () => {
   return (
-    <div data-tauri-drag-region className="h-8 bg-toolbar select-none flex justify-content justify-end">
+    <div data-tauri-drag-region className="h-8 bg-toolbar select-none flex justify-content justify-end z-10">
       <div className="titlebar-button"
         onClick={() => {
           appWindow.minimize();
