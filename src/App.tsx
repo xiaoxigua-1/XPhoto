@@ -17,10 +17,12 @@ function App() {
         {
           name: 'foo',
           color: '#ffffff',
+          folders: [],
         },
         {
           name: 'fooasdasdasdasd',
           color: '#ffffe0',
+          folders: [],
         }
       ]);
       setSettings({
