@@ -1,4 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
+import { appWindow } from "@tauri-apps/api/window";
 import Setting from '../settings';
 import { Group, Settings } from '../../data';
 
@@ -21,6 +22,11 @@ const Context: FC<Context> = ({ }) => {
     move: false,
   });
 
+  useEffect(() => {
+    return () => {
+    }
+  }, [fileTree]);
+
   return (
     <div className="relative w-full h-screen pt-8 flex"
       onMouseMove={(event) => {
@@ -41,9 +47,9 @@ const Context: FC<Context> = ({ }) => {
         });
       }}
     >
-      <div className="h-full relative" style={{ width: fileTree.width }}>
+      <div className="h-full relative bg-[#2f2f33]" style={{ width: fileTree.width }}>
         <div
-          className="absolute right-0 w-1 h-full bg-black cursor-ew-resize"
+          className="absolute right-0 w-1 h-full cursor-ew-resize"
           onMouseDown={() => {
             let cloneFileTree = {...fileTree};
             cloneFileTree.move = true;

@@ -8,24 +8,11 @@ html {
 
 @layer components {
   .titlebar-button {
-    @apply inline-flex justify-center items-center w-8 h-8 hover:bg-toolbar-hover transition-colors;
+    @apply inline-flex justify-center items-center w-8 h-8 hover:bg-[#434247] transition-colors;
   }
   .bg-toolbar {
     @apply fixed top-0 left-0 right-0;
   }
-}
-
-@layer base {
-  .bg-toolbar-hover {
-    background-color: #434247;
-  }
-  .bg-27272c {
-    background-color: #27272c;
-  }
-}
-
-.bg-toolbar {
-  background-color: #353438;
 }
 
 .group:hover div {

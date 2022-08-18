@@ -41,7 +41,7 @@ const Nav: FC<Nav> = ({ groups, setGroup, setSelectGroup, setOpenSetting }) => {
   }, []);
 
   return (
-    <div className="bg-27272c w-14 h-screen pt-8 flex flex-col overflow-hidden items-center">
+    <div className="bg-[#27272c] w-14 h-screen pt-8 flex flex-col overflow-hidden items-center">
       <div className="flex-grow overflow-auto pb-3 w-full">
         {groups.map((group, index) => {
           return (
@@ -63,8 +63,8 @@ const Nav: FC<Nav> = ({ groups, setGroup, setSelectGroup, setOpenSetting }) => {
               }}
             >
               {groupName(group.name)}
-              <div className="fixed left-14 hidden bg-gray-900 text-white p-2 rounded-md">{group.name}</div>
-              <div className="fixed w-3 overflow-hidden hidden left-11">
+              <div className="fixed left-14 hidden bg-gray-900 text-white p-2 rounded-md z-10">{group.name}</div>
+              <div className="fixed w-3 overflow-hidden hidden left-11 z-10">
                 <div className="h-4 bg-gray-900 -rotate-45 transform origin-top-right"></div>
               </div>
             </div>
