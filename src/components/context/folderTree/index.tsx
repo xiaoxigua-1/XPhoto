@@ -19,9 +19,13 @@ const FolderTree: FC<FolderTreeData> = ({ name, children, fileType }) => {
 
   return (
     <div className="overflow-hidden pl-1 w-full">
-      {/* Folder */}
+      
       {fileType === 'folder' ? (
-        <div className="flex flex-row items-center">
+        <div
+          className="flex flex-row items-center cursor-pointer"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {/* Folder */}
           <div className="text-[#aaaaaa] text-sm">
             {isOpen ? <AiOutlineRight /> : <AiOutlineDown />}
           </div>
@@ -31,7 +35,7 @@ const FolderTree: FC<FolderTreeData> = ({ name, children, fileType }) => {
           <div className="pl-1 text-white">{name}</div>
         </div>
       ) : (
-        <File />
+        <File name={name} type={fileType}/>
       )}
     </div>
   );

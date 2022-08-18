@@ -37,7 +37,7 @@ const Context: FC<Context> = ({ }) => {
   }, []);
 
   return (
-    <div className="relative w-full h-screen pt-8 flex"
+    <div className="relative w-full h-screen pt-8 flex select-none"
       onMouseMove={(event) => {
         if (folderTreeMove.move) {
           let width = event.clientX - 50;
