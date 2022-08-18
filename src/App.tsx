@@ -33,7 +33,7 @@ function App() {
       // TODO: get database data
     }
 
-    invoke('plugin:window|close_splashscreen')
+    invoke('plugin:window|close_splashscreen');
   }, []);
 
   return (

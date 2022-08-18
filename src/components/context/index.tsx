@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
-import { appWindow } from "@tauri-apps/api/window";
 import Setting from '../settings';
+import FolderTree, { FolderTreeData } from './folderTree';
 import { Group, Settings } from '../../data';
 
 interface Context {
@@ -17,45 +17,53 @@ interface FileTree {
 }
 
 const Context: FC<Context> = ({ }) => {
-  const [fileTree, setFileTree] = useState<FileTree>({
+  const [folderTreeMove, setFolderTreeMove] = useState<FileTree>({
     width: 130,
     move: false,
   });
+  const [folderTree, setFolderTree] = useState<FolderTreeData>();
 
   useEffect(() => {
-    return () => {
+    if (import.meta.env.DEV) {
+      setFolderTree({
+        name: 'test',
+        path: '/root/',
+        children: [],
+        fileType: 'folder',
+      });
+    } else {
+      // TODO: get database
     }
-  }, [fileTree]);
+  }, []);
 
   return (
     <div className="relative w-full h-screen pt-8 flex"
       onMouseMove={(event) => {
-        if (fileTree.move) {
+        if (folderTreeMove.move) {
           let width = event.clientX - 50;
-          width = Math.max(130, width);
-          width = Math.min(400, width);
-          setFileTree({
+          width = Math.min(400, Math.max(130, width));
+          setFolderTreeMove({
             width: width,
             move: true,
           });
         }
       }}
       onMouseUp={() => {
-        setFileTree({
+        setFolderTreeMove({
           move: false,
-          width: fileTree.width,
+          width: folderTreeMove.width,
         });
       }}
     >
-      <div className="h-full relative bg-[#2f2f33]" style={{ width: fileTree.width }}>
+      <div className="h-full relative bg-[#2f2f33]" style={{ width: folderTreeMove.width }}>
+        <div className="text-xs p-3 text-white">Folders</div>
+        <FolderTree {...folderTree!!} />
         <div
-          className="absolute right-0 w-1 h-full cursor-ew-resize"
-          onMouseDown={() => {
-            let cloneFileTree = {...fileTree};
-            cloneFileTree.move = true;
-            setFileTree(cloneFileTree);
-            console.log(cloneFileTree);
-          }}
+          className="absolute right-0 w-1 h-full cursor-ew-resize top-0"
+          onMouseDown={() => setFolderTreeMove({
+            move: true,
+            width: folderTreeMove.width
+          })}
         />
       </div>
       <div>
