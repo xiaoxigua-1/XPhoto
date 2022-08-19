@@ -1,0 +1,22 @@
+{
+  "folders": {
+    "name": "root",
+    "path": "/",
+    "children": [
+      {
+        "name": "test",
+        "path": "/root",
+        "children": [
+          {
+            "name": "test",
+            "path": "/root/test/",
+            "children": [],
+            "fileType": "image"
+          }
+        ],
+        "fileType": "folder"
+      }
+    ],
+    "fileType": "folder"
+  }
+}

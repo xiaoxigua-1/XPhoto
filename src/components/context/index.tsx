@@ -2,6 +2,7 @@ import React, { FC, useState, useEffect } from 'react';
 import Setting from '../settings';
 import FolderTree, { FolderTreeData } from './folderTree';
 import { Group, Settings } from '../../data';
+import testData from './test_data.json';
 
 interface Context {
   openSetting: boolean;
@@ -25,23 +26,19 @@ const Context: FC<Context> = ({ }) => {
 
   useEffect(() => {
     if (import.meta.env.DEV) {
-      setFolderTree({
-        name: 'test',
-        path: '/root/',
-        children: [],
-        fileType: 'folder',
-      });
+      setFolderTree(testData.folders as FolderTreeData);
     } else {
       // TODO: get database
     }
   }, []);
 
   return (
-    <div className="relative w-full h-screen pt-8 flex select-none"
+    <div 
+      className="relative w-full h-screen pt-8 flex select-none"
+      id="folders"
       onMouseMove={(event) => {
         if (folderTreeMove.move) {
-          let width = event.clientX - 50;
-          width = Math.min(400, Math.max(130, width));
+          let width = Math.min(400, Math.max(130, event.clientX - 50));
           setFolderTreeMove({
             width: width,
             move: true,

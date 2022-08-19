@@ -50,6 +50,7 @@ const Nav: FC<Nav> = ({ groups, setGroup, setSelectGroup, setOpenSetting }) => {
               style={{
                 backgroundColor: group.color,
               }}
+              key={group.name}
               onClick={() => setSelectGroup(index)}
               onContextMenu={(e) => {
                 // menu
@@ -79,7 +80,7 @@ const Nav: FC<Nav> = ({ groups, setGroup, setSelectGroup, setOpenSetting }) => {
           left: rightMenu.x
         }}>
         {rightMenuContext.map(context => (
-          <div className="hover:bg-blue-600 p-1 px-3">{context}</div>
+          <div className="hover:bg-blue-600 p-1 px-3" key={context}>{context}</div>
         ))}
       </div>
       <div className="cursor-pointer my-3"
