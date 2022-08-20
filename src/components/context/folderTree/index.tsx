@@ -16,20 +16,32 @@ export interface FolderTreeData {
   onEdit?: (path: string) => boolean;
 }
 
-const FolderTree: FC<FolderTreeData> = ({ name, children, fileType, path }) => {
+function FolderTree({ name, children, fileType, path }: FolderTreeData) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDragOver, setIsDragOver] = useState(false);
 
   return (
-    <div className="overflow-hidden pl-1 w-full">
-
+    <div
+      className="overflow-hidden pl-1 w-full"
+    >
       {fileType === 'folder' ? (
         <div
           draggable="true"
+          onDragOver={(e) => {
+            console.log(e.dataTransfer.getData('text/plain'));
+            if (e.dataTransfer.getData('text/plain') !== `${path}/${name}/`) {
+              setIsDragOver(true);
+            }
+          }}
+          onDragLeave={() => {
+            setIsDragOver(false);
+          }}
         >
           {/* Folder */}
           <div
             className="flex flex-row items-center cursor-pointer"
             onClick={() => setIsOpen(!isOpen)}
+            style={{ backgroundColor: isDragOver ? "#3333ff22" : "transparent" }}
           >
             <div className="text-[#aaaaaa] text-sm">
               {isOpen ? <AiOutlineDown /> : <AiOutlineRight />}
@@ -39,17 +51,21 @@ const FolderTree: FC<FolderTreeData> = ({ name, children, fileType, path }) => {
             </div>
             <div className="pl-1 text-white text-sm">{name}</div>
           </div>
-          {/* Folder children */}
-          <div
-            className="transition-all transition-duration ml-1 pl-2 border-l-[1px] border-slate-500"
-            style={{ height: isOpen ? 'auto' : '0' }}
-          >
-            {children.map(child => <FolderTree {...child} key={child.path} />)}
-          </div>
+
         </div>
       ) : (
         <File name={name} type={fileType} path={path} />
       )}
+
+      {/* Folder children */}
+      {fileType === 'folder' ? (
+        <div
+          className="pl-2 border-l-[1px] border-slate-500"
+          style={{ height: isOpen ? 'auto' : '0', backgroundColor: isDragOver ? '#3333ff22' : 'transparent' }}
+        >
+          {children.map(child => <FolderTree {...child} key={`${child.path}/${child.name}`} />)}
+        </div>
+      ) : null}
     </div>
   );
 };

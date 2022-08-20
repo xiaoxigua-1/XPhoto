@@ -5,10 +5,16 @@
     "children": [
       {
         "name": "test",
-        "path": "/root",
+        "path": "/root/",
         "children": [
           {
             "name": "test",
+            "path": "/root/test/",
+            "children": [],
+            "fileType": "image"
+          },
+          {
+            "name": "test2",
             "path": "/root/test/",
             "children": [],
             "fileType": "image"

@@ -13,10 +13,7 @@ const File: FC<File> = ({ name, type, path }) => {
       className="flex items-center cursor-pointer"
       draggable="true"
       onDragStart={(e) => {
-        e.dataTransfer.setData('json', JSON.stringify({
-          path: path,
-          name: name,
-        }));
+        e.dataTransfer.setData('text/plain', path);
       }}
     >
       <div className="text-white">
