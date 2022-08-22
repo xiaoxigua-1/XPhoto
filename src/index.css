@@ -18,3 +18,8 @@ html {
 .group:hover div {
   display: block;
 }
+
+html,
+body {
+  overflow: hidden;
+}

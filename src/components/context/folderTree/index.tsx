@@ -16,26 +16,24 @@ export interface FolderTreeData {
   onEdit?: (path: string) => boolean;
 }
 
-function FolderTree({ name, children, fileType, path }: FolderTreeData) {
+function FolderTree({ name, children, fileType, path, onRemove, onCreate, onEdit }: FolderTreeData) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDragOver, setIsDragOver] = useState(false);
 
   return (
     <div
-      className="overflow-hidden pl-1 w-full"
+      className="overflow-hidden w-full"
     >
       {fileType === 'folder' ? (
         <div
           draggable="true"
           onDragOver={(e) => {
-            console.log(e.dataTransfer.getData('text/plain'));
             if (e.dataTransfer.getData('text/plain') !== `${path}/${name}/`) {
               setIsDragOver(true);
             }
           }}
-          onDragLeave={() => {
-            setIsDragOver(false);
-          }}
+          onDragLeave={() => setIsDragOver(false)}
+          onDrop={() => setIsDragOver(false)}
         >
           {/* Folder */}
           <div
@@ -63,7 +61,15 @@ function FolderTree({ name, children, fileType, path }: FolderTreeData) {
           className="pl-2 border-l-[1px] border-slate-500"
           style={{ height: isOpen ? 'auto' : '0', backgroundColor: isDragOver ? '#3333ff22' : 'transparent' }}
         >
-          {children.map(child => <FolderTree {...child} key={`${child.path}/${child.name}`} />)}
+          {children.map(
+            child => <FolderTree
+              {...child}
+              key={`${child.path}/${child.name}`}
+              onCreate={onCreate}
+              onEdit={onEdit}
+              onRemove={onRemove}
+            />
+          )}
         </div>
       ) : null}
     </div>
