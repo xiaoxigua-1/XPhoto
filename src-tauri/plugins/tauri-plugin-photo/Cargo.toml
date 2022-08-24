@@ -11,3 +11,6 @@ exclude = ["/examples"]
 tauri = { version = "1.0.5" }
 diesel = { version = "1.4.4", features = ["sqlite"] }
 dotenv = "0.15.0"
+directories = "4.0"
+toml = "0.4.2"
+serde = "1.0"

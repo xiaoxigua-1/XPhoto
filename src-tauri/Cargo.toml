@@ -21,6 +21,7 @@ tauri = { version = "1.0.5", features = ["api-all"] }
 
 # plugins
 tauri-plugin-window = { path = "./plugins/tauri-plugin-window"}
+tauri-plugin-photo = { path = "./plugins/tauri-plugin-photo"}
 
 [features]
 # by default Tauri runs in production mode

@@ -8,6 +8,25 @@
         "path": "/root/",
         "children": [
           {
+            "name": "a",
+            "path": "/root/test/",
+            "children": [
+              {
+                "name": "test",
+                "path": "/root/test/",
+                "children": [],
+                "fileType": "image"
+              },
+              {
+                "name": "test2",
+                "path": "/root/test/",
+                "children": [],
+                "fileType": "image"
+              }
+            ],
+            "fileType": "folder"
+          },
+          {
             "name": "test",
             "path": "/root/test/",
             "children": [],
