@@ -31,6 +31,10 @@ function App() {
       setSelectGroup(0);
     } else {
       // TODO: get database data
+      (async() => {
+        let config = await invoke('plugin:photo|get_config');
+        console.log(config);
+      })();
     }
 
     invoke('plugin:window|close_splashscreen');

@@ -1,17 +1,30 @@
 extern crate directories;
+#[macro_use] extern crate diesel;
 
 mod config;
+mod models;
+mod schema;
+mod groups;
 
 use config::Config;
 use diesel::{sqlite, Connection, SqliteConnection};
 use directories::ProjectDirs;
-use std::{fs, sync::{Mutex, Arc}};
+use std::{
+    fs,
+    path::PathBuf,
+    sync::{Arc, Mutex},
+};
 use tauri::{
     plugin::{Builder, TauriPlugin},
     Manager, Runtime,
 };
 
-struct DBConnect(Mutex<SqliteConnection>);
+pub struct DBConnect(Arc<Mutex<SqliteConnection>>);
+
+pub struct ConfigState {
+    config: Arc<Mutex<Config>>,
+    config_path: PathBuf,
+}
 
 /// Initializes the plugin.
 pub fn init<R: Runtime>() -> TauriPlugin<R> {
@@ -25,7 +38,7 @@ pub fn init<R: Runtime>() -> TauriPlugin<R> {
         toml::from_str(config_str.as_str()).expect("config.toml parse failed")
     } else {
         let config = Config::default();
-        fs::write(config_path, toml::to_string(&config).unwrap()).unwrap();
+        config.write_config(&config_path);
         config
     };
 
@@ -33,10 +46,17 @@ pub fn init<R: Runtime>() -> TauriPlugin<R> {
         .expect("");
     Builder::new("photo")
         .setup(|app| {
-            app.manage(DBConnect(Mutex::new(db)));
-            app.manage(Arc::new(Mutex::new(config)));
+            app.manage(DBConnect(Arc::new(Mutex::new(db))));
+            app.manage(ConfigState {
+                config: Arc::new(Mutex::new(config)),
+                config_path,
+            });
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![config::get_config, config::set_config])
+        .invoke_handler(tauri::generate_handler![
+            config::get_config,
+            config::set_config,
+            groups::get_groupds,
+        ])
         .build()
 }
