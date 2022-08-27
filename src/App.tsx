@@ -38,6 +38,9 @@ function App() {
     }
 
     invoke('plugin:window|close_splashscreen');
+    (async () => {
+      console.log(await invoke('plugin:photo|get_groups'));
+    })();
   }, []);
 
   return (

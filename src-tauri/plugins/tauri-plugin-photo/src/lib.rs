@@ -1,10 +1,11 @@
 extern crate directories;
 #[macro_use] extern crate diesel;
+#[macro_use] extern crate diesel_migrations;
 
 mod config;
 mod models;
 mod schema;
-mod groups;
+mod group;
 
 use config::Config;
 use diesel::{sqlite, Connection, SqliteConnection};
@@ -26,6 +27,7 @@ pub struct ConfigState {
     config_path: PathBuf,
 }
 
+embed_migrations!("./migrations");
 /// Initializes the plugin.
 pub fn init<R: Runtime>() -> TauriPlugin<R> {
     let project_dir = ProjectDirs::from("com", "xiaoxigua-1", "XPhoto").unwrap();
@@ -41,9 +43,13 @@ pub fn init<R: Runtime>() -> TauriPlugin<R> {
         config.write_config(&config_path);
         config
     };
-
+    
     let db = sqlite::SqliteConnection::establish(data_dir.join("data.sqlite").to_str().unwrap())
         .expect("");
+    // database initialization
+    embedded_migrations::run(&db).unwrap();
+    embedded_migrations::run_with_output(&db, &mut std::io::stdout()).unwrap();
+    
     Builder::new("photo")
         .setup(|app| {
             app.manage(DBConnect(Arc::new(Mutex::new(db))));
@@ -56,7 +62,7 @@ pub fn init<R: Runtime>() -> TauriPlugin<R> {
         .invoke_handler(tauri::generate_handler![
             config::get_config,
             config::set_config,
-            groups::get_groupds,
+            group::get_groups,
         ])
         .build()
 }

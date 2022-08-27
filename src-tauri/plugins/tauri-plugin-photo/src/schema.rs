@@ -1,7 +1,7 @@
 use diesel::table;
 
 table! {
-    groups_data {
+    groups(id) {
         id -> Integer,
         name -> Text,
         color -> Text,
