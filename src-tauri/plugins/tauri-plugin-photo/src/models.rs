@@ -1,7 +1,6 @@
-use diesel::{Queryable};
-use serde::{Serialize, Deserialize};
 use super::schema::groups;
-
+use diesel::Queryable;
+use serde::{Deserialize, Serialize};
 
 #[derive(Queryable, Serialize, Clone)]
 pub struct Groups {
@@ -11,7 +10,7 @@ pub struct Groups {
 }
 
 #[derive(Insertable, Deserialize, Clone)]
-#[table_name="groups"]
+#[table_name = "groups"]
 pub struct NewGroup {
     name: String,
     color: String,
