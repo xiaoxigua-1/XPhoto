@@ -68,7 +68,7 @@ pub fn init<R: Runtime>() -> TauriPlugin<R> {
         // groups commands
         .invoke_handler(tauri::generate_handler![
             group::get_groups,
-            group::add_groups,
+            group::add_group,
         ])
         .build()
 }
