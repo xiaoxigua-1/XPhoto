@@ -59,10 +59,16 @@ pub fn init<R: Runtime>() -> TauriPlugin<R> {
             });
             Ok(())
         })
+        // config commands
         .invoke_handler(tauri::generate_handler![
             config::get_config,
             config::set_config,
+            
+        ])
+        // groups commands
+        .invoke_handler(tauri::generate_handler![
             group::get_groups,
+            group::add_groups,
         ])
         .build()
 }
