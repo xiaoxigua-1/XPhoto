@@ -1,6 +1,6 @@
 -- Your SQL goes here
 CREATE TABLE groups (
-  id SERIAL PRIMARY KEY,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   `name` TEXT NOT NULL,
   color TEXT NOT NULL
 );

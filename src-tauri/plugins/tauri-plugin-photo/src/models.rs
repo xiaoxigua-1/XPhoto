@@ -12,6 +12,6 @@ pub struct Groups {
 #[derive(Insertable, Deserialize, Clone)]
 #[table_name = "groups"]
 pub struct NewGroup {
-    name: String,
-    color: String,
+    pub name: String,
+    pub color: String,
 }
