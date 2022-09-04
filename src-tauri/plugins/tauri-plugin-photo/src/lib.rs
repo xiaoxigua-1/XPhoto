@@ -71,6 +71,7 @@ pub fn init<R: Runtime>() -> TauriPlugin<R> {
             group::get_groups,
             group::add_group,
             group::edit_group,
+            group::delete_group,
         ])
         .build()
 }
